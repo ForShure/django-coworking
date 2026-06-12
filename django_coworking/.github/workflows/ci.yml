@@ -1,0 +1,19 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Забираем код из репозитория
+        uses: actions/checkout@v4
+
+      - name: Сборка Docker и запуск Pytest
+        run: |
+          docker compose build
+          docker compose run --rm web pytest
