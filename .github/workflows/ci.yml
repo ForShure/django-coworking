@@ -16,5 +16,12 @@ jobs:
       - name: Сборка Docker и запуск Pytest
         run: |
           cd django_coworking
+          # Создаем фейковый .env "на лету" прямо в облаке
+          touch .env
+          echo "DB_NAME=postgres" >> .env
+          echo "DB_USER=postgres" >> .env
+          echo "DB_PASS=12345" >> .env
+          echo "SECRET_KEY=super_secret_test_key" >> .env
+          # Теперь докеру будет что читать
           docker compose build
           docker compose run --rm web pytest
