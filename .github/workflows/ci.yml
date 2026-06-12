@@ -15,5 +15,6 @@ jobs:
 
       - name: Сборка Docker и запуск Pytest
         run: |
+          cd django_coworking
           docker compose build
           docker compose run --rm web pytest
